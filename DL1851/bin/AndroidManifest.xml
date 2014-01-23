@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ba.fit.dl1851"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    
+        <!--  Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ba.fit.dl1851.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+ 
+        <!-- All Product Activity -->
+        <activity
+            android:name=".AllPicturesActivity"
+            android:label="All Pictures" >
+        </activity>
+ 
+        <!-- Add Product Activity -->
+        <activity
+            android:name=".NewPictureActivity"
+            android:label="Add New Picture" >
+        </activity>
+ 
+        <!-- Edit Product Activity -->
+        <activity
+            android:name=".EditPictureActivity"
+            android:label="Edit Picture" >
+        </activity>
+        <activity android:name=".ImageGallery" />
+    </application>
+ 
+</manifest>

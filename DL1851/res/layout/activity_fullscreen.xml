@@ -1,0 +1,32 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:background="#0099cc"
+    android:orientation="vertical"
+    tools:context=".FullscreenActivity" >
+
+    <!-- This FrameLayout insets its children based on system windows using android:fitsSystemWindows. -->
+
+        <!-- Sample Dashboard screen with Two buttons -->
+        <!-- Button to view all products screen -->
+
+         <Button
+            android:id="@+id/btnViewPictures"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dip"
+            android:text="View Pictures" />
+
+        <!-- Button to create a new product screen -->
+
+        <Button
+            android:id="@+id/btnCreatePicture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dip"
+            android:text="Add New Pictures" />
+
+
+</FrameLayout>
