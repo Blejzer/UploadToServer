@@ -92,45 +92,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			//Ovdje dodajem kod za dodavanje proizvoda u bazu
 
 			// creating new product in background thread
-			protected String doInBackground(String... args) {
-				String name = inputName.getText().toString();
-				String price = inputPrice.getText().toString();
-				String description = inputDesc.getText().toString();
-
-				// Building Parameters
-				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("name", name));
-				params.add(new BasicNameValuePair("price", price));
-				params.add(new BasicNameValuePair("description", description));
-
-				// getting JSON Object
-				// Note that create product url accepts POST method
-				JSONObject json = jsonParser.makeHttpRequest(url_create_product,
-						"POST", params);
-
-				// check log cat fro response
-				Log.d("Create Response", json.toString());
-
-				// check for success tag
-				try {
-					int success = json.getInt(TAG_SUCCESS);
-
-					if (success == 1) {
-						// successfully created product
-						/*Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
-						startActivity(i);*/
-						Log.d("Create Response", String.valueOf(success));
-						// closing this screen
-						finish();
-					} else {
-						// failed to create product
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-
-				return null;
-			}
+			new CreateNewProduct().execute();
 			// kraj dodanog koda
 
 			new Thread(new Runnable() {
