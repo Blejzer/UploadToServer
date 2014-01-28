@@ -43,6 +43,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	private String upLoadServerUri = null;
 	private String imagepath=null;
+	
 
 	JSONParser jsonParser = new JSONParser();
 	EditText inputName;
@@ -113,6 +114,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			//Bitmap photo = (Bitmap) data.getData().getPath(); 
 
 			Uri selectedImageUri = data.getData();
+			Log.e("uploadFile", selectedImageUri.toString());
 			imagepath = getPath(selectedImageUri);
 			Bitmap bitmap=BitmapFactory.decodeFile(imagepath);
 			imageview.setImageBitmap(bitmap);
@@ -216,7 +218,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 				if(serverResponseCode == 200){
 
-
+					
 					runOnUiThread(new Runnable() {
 						public void run() {
 							String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
@@ -276,12 +278,14 @@ public class MainActivity extends Activity implements OnClickListener{
 			String name = inputName.getText().toString();
 			String price = inputPrice.getText().toString();
 			String description = inputDesc.getText().toString();
+			String link = "http://10.0.2.2/android_fit/images/" + (new File(imagepath).getName());
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("name", name));
 			params.add(new BasicNameValuePair("price", price));
 			params.add(new BasicNameValuePair("description", description));
+			params.add(new BasicNameValuePair("link", link));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
