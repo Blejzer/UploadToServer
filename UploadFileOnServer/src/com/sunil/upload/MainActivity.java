@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	JSONParser jsonParser = new JSONParser();
 	EditText inputName;
-	EditText inputPrice;
 	EditText inputDesc;
 
 	// url to create new product
@@ -68,7 +67,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		imageview = (ImageView)findViewById(R.id.imageView_pic);
 		// Edit Text
 		inputName = (EditText) findViewById(R.id.inputName);
-		inputPrice = (EditText) findViewById(R.id.inputPrice);
 		inputDesc = (EditText) findViewById(R.id.inputDesc);
 
 		btnselectpic.setOnClickListener(this);
@@ -276,14 +274,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		 * */
 		protected String doInBackground(String... args) {
 			String name = inputName.getText().toString();
-			String price = inputPrice.getText().toString();
 			String description = inputDesc.getText().toString();
 			String link = "http://10.0.2.2/android_fit/images/" + (new File(imagepath).getName());
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("name", name));
-			params.add(new BasicNameValuePair("price", price));
 			params.add(new BasicNameValuePair("description", description));
 			params.add(new BasicNameValuePair("link", link));
 
@@ -305,7 +301,7 @@ public class MainActivity extends Activity implements OnClickListener{
 					startActivity(i);*/
 					Log.d("Create Response", String.valueOf(success));
 					// closing this screen
-					finish();
+					// finish();
 				} else {
 					// failed to create product
 				}
