@@ -1,6 +1,9 @@
 package com.sunil.upload;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -56,29 +59,36 @@ public class NamesParser {
 				// products found
 				// Getting Array of Products
 				products = json.getJSONArray(TAG_PRODUCTS);
-
+				
+				String cre;
+				String year;
+				String day;
+				String month;
 				// looping through All Products
 				for (int i = 0; i < products.length(); i++) {
 					JSONObject c = products.getJSONObject(i);
 
 					// Storing each json item in variable
 					String pid = c.getString(TAG_PID);
-					Log.d("All Products: ", c.getString(TAG_PID));
 
 					String name = c.getString(TAG_NAME);
-					Log.d("All Products: ", c.getString(TAG_NAME));
 
 					String description = c.getString(TAG_DESCRIPTION);
-					Log.d("All Products: ", c.getString(TAG_DESCRIPTION));
 
-					String created = c.getString(TAG_CREATED);
-					Log.d("All Products: ", c.getString(TAG_CREATED));
+					cre = c.getString(TAG_CREATED).substring(0, 10);
+					year = cre.substring(0, 4);
+					month = cre.substring(6,7);
+					day = cre.substring(9, 10);
+					
+					String created = day.concat("/").concat(month).concat("/").concat(year);
 
-					String updated = c.getString(TAG_UPDATED);
-					Log.d("All Products: ", c.getString(TAG_UPDATED));
-
+					cre = c.getString(TAG_UPDATED).substring(0, 10);
+					year = cre.substring(0, 4);
+					month = cre.substring(6,7);
+					day = cre.substring(9, 10);
+					String updated = day.concat("/").concat(month).concat("/").concat(year);
+					
 					String link = c.getString(TAG_LINK);
-					Log.d("All Products: ", c.getString(TAG_LINK));
 
 					objItem = new Item();
 
@@ -90,17 +100,13 @@ public class NamesParser {
 					objItem.setLink(link);
 
 					listArray.add(objItem);						
-				}
-				/*else {
-					// no products found
-					// Launch Add New product Activity
-					Intent i = new Intent(getApplicationContext(),
-							MainActivity.class);
-					// Closing all previous activities
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(i);
-				}*/
+				} 					
+			} else {
+				// no products found
+				// Launch Add New product Activity
+				return listArray;
 			}
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

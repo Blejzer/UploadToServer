@@ -31,10 +31,9 @@ public final class R {
         public static final int profile=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f090010;
+        public static final int action_settings=0x7f090012;
         public static final int button_selectpic=0x7f090002;
-        public static final int camera=0x7f090011;
-        public static final int gallery=0x7f090012;
+        public static final int gallery=0x7f090011;
         public static final int image=0x7f09000b;
         public static final int imageView1=0x7f09000d;
         public static final int imageView_pic=0x7f090001;
@@ -43,6 +42,7 @@ public final class R {
         public static final int inputName=0x7f090003;
         public static final int listview=0x7f090000;
         public static final int messageText=0x7f090006;
+        public static final int newproduct=0x7f090010;
         public static final int pbar=0x7f09000f;
         public static final int pbardesc=0x7f09000a;
         public static final int tvcreated=0x7f09000c;
