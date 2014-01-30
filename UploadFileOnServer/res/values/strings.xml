@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">UploadFileOnServer</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="product_name">Naziv</string>
-    <string name="price">Cijena</string>
+    <string name="app_name">FIT 1851 DL HCI</string>
+    <string name="action_settings">Podesavanja</string>
+    <string name="product_name">Registarska oznaka</string>
     <string name="description">Opis</string>
-    <string name="title_activity_list_all">ListAllActivity</string>
+    <string name="title_activity_list_all">Svi unosi</string>
     <string name="upload_f">upload fotografija</string>
     <string name="fitId">1851 DL</string>
+    <string name="odaberi_sliku">Odaberi sliku</string>
+    <string name="novo_vozilo">Novo vozilo</string>
+    <string name="sva_vozila">Sve slike</string>
+    <string name="upload_slike">Upload slike</string>
+    <string name="odabrana_slika">Odabrana slika</string>
 
 </resources>

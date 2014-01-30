@@ -2,7 +2,7 @@ package com.sunil.upload;
 
 public class Item {
 	private String pid;
-	private String name;
+	private String regplate;
 	private String description;
 	private String created_at;
 	private String updated_at;
@@ -13,11 +13,11 @@ public class Item {
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
-	public String getName() {
-		return name;
+	public String getRegPlate() {
+		return regplate;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setRegPlate(String name) {
+		this.regplate = name;
 	}
 	public String getDescription() {
 		return description;

@@ -68,9 +68,9 @@ public class NewsRowAdapter extends ArrayAdapter<Item> {
 		holder.imgView = (ImageView) view.findViewById(R.id.image);
 		holder.pbar = (ProgressBar) view.findViewById(R.id.pbar);
 
-		if (holder.tvName != null && null != objBean.getName()
-				&& objBean.getName().trim().length() > 0) {
-			holder.tvName.setText(Html.fromHtml(objBean.getName()));
+		if (holder.tvName != null && null != objBean.getRegPlate()
+				&& objBean.getRegPlate().trim().length() > 0) {
+			holder.tvName.setText(Html.fromHtml(objBean.getRegPlate()));
 		}
 		if (holder.tvDescription != null && null != objBean.getDescription()
 				&& objBean.getDescription().trim().length() > 0) {

@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ListAllActivity extends Activity implements OnItemClickListener {
 
-	private static final String feed = "http://10.0.2.2/android_fit/get_all_products.php";
+	private static final String feed = "http://www.tabletzasvakog.com/android_fit/get_all_products.php";
 
 	List<Item> arrayOfList;
 	ListView listView;
@@ -32,7 +32,7 @@ public class ListAllActivity extends Activity implements OnItemClickListener {
 		if (Utils.isNetworkAvailable(ListAllActivity.this)) {
 			new MyTask().execute(feed);
 		} else {
-			showToast("No Network Connection!!!");
+			showToast("Nema mrezne konekcije!!!");
 		}
 
 	}
@@ -49,8 +49,8 @@ public class ListAllActivity extends Activity implements OnItemClickListener {
 			long id) {
 		Item item = arrayOfList.get(position);
 		Intent intent = new Intent(ListAllActivity.this, DetailActivity.class);
-		intent.putExtra("url", item.getLink());
-		intent.putExtra("name", item.getName());
+		intent.putExtra("link", item.getLink());
+		intent.putExtra("regplate", item.getRegPlate());
 		intent.putExtra("description", item.getDescription());
 		startActivity(intent);
 	}
@@ -67,7 +67,7 @@ public class ListAllActivity extends Activity implements OnItemClickListener {
 			super.onPreExecute();
 
 			pDialog = new ProgressDialog(ListAllActivity.this);
-			pDialog.setMessage("Loading...");
+			pDialog.setMessage("Ucitavam...");
 			pDialog.show();
 
 		}
@@ -87,7 +87,7 @@ public class ListAllActivity extends Activity implements OnItemClickListener {
 			}
 
 			if (null == arrayOfList || arrayOfList.size() == 0) {
-				showToast("No data found from web!!!");
+				showToast("Nema podataka sa weba!!!");
 				Intent i = new Intent(getApplicationContext(),
 						MainActivity.class);
 				// Closing all previous activities
@@ -125,7 +125,7 @@ public class ListAllActivity extends Activity implements OnItemClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.newproduct:
+		case R.id.newvehicle:
 			//define the file-name to save photo taken by Camera activity
 			Intent i = new Intent(getApplicationContext(),
 					MainActivity.class);

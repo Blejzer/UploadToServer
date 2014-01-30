@@ -34,29 +34,51 @@
         android:layout_toLeftOf="@+id/imageView1"
         android:layout_toRightOf="@+id/image"
         android:ellipsize="end"
-        android:maxLines="3"
+        android:maxLines="2"
         android:text="description"
         android:textColor="@android:color/black"
         android:textSize="13dip" />
+    
+    <TextView 
+        android:id="@+id/tvtextc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="5dip"
+        android:text="Created: "
+        android:textColor="@android:color/black"
+        android:textSize="12dip" />
 
     <TextView
         android:id="@+id/tvcreated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="55dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="5dip"
         android:text="created"
         android:textColor="@android:color/black"
         android:textSize="12dip" />
     
+        <TextView 
+        android:id="@+id/tvtextu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="65dip"
+        android:text="Updated: "
+        android:textColor="@android:color/black"
+        android:textSize="12dip" />
+        
         <TextView
         android:id="@+id/tvupdated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dip"
+        android:layout_marginTop="65dip"
         android:text="updated"
         android:textColor="@android:color/black"
         android:textSize="12dip" />

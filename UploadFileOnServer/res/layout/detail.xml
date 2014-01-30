@@ -5,20 +5,13 @@
     android:background="#d3d3d3"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/imgdesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:src="@drawable/profile" />
-
     <TextView
-        android:id="@+id/tvname"
+        android:id="@+id/tvregplate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imgdesc"
-        android:layout_toRightOf="@+id/imgdesc"
-        android:text="name"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/product_name"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
@@ -29,14 +22,25 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imgdesc"
         android:layout_margin="5dp"
-        android:text="Descrption"
+        android:text="@string/description"
         android:textColor="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/imgdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvregplate"
+        android:layout_margin="5dp"
+        android:src="@drawable/profile" android:contentDescription="@string/odabrana_slika"/>
 
     <ProgressBar
         android:id="@+id/pbardesc"
         style="@android:style/Widget.ProgressBar.Small.Inverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="35dp" />
+        android:layout_alignBottom="@+id/imgdesc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp" />
 
 </RelativeLayout>

@@ -1,9 +1,6 @@
 package com.sunil.upload;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -20,21 +17,21 @@ public class NamesParser {
 	// Creating JSON Parser object
 	JSONParser jParser = new JSONParser();
 
-	// url to get all products list
-	private static String url_all_products = "http://10.0.2.2/android_fit/get_all_products.php";
+	// url to get all vehicles list
+	private static String url_all_vehicles = "http://www.tabletzasvakog.com/android_fit/get_all_products.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_PRODUCTS = "products";
+	private static final String TAG_VEHICLES = "products";
 	private static final String TAG_PID = "pid";
-	private static final String TAG_NAME = "name";
+	private static final String TAG_REGPLATE = "name";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_CREATED = "created_at";
 	private static final String TAG_UPDATED = "updated_at";
 	private static final String TAG_LINK = "link";
 
-	// products JSONArray
-	JSONArray products = null;
+	// vehicles JSONArray
+	JSONArray vehicles = null;
 
 	public List<Item> getData(String url) {
 
@@ -45,10 +42,10 @@ public class NamesParser {
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(url_all_vehicles, "GET", params);
 
 			// Check your log cat for JSON reponse
-			Log.d("All Products: ", json.toString());
+			Log.d("All Vehicles: ", json.toString());
 
 
 			// Checking for SUCCESS TAG
@@ -56,44 +53,48 @@ public class NamesParser {
 
 			if (success == 1) 
 			{
-				// products found
-				// Getting Array of Products
-				products = json.getJSONArray(TAG_PRODUCTS);
+				// vehicles found
+				// Getting Array of Vehicles
+				vehicles = json.getJSONArray(TAG_VEHICLES);
 				
 				String cre;
 				String year;
 				String day;
 				String month;
-				// looping through All Products
-				for (int i = 0; i < products.length(); i++) {
-					JSONObject c = products.getJSONObject(i);
+				// looping through All Vehicles
+				for (int i = 0; i < vehicles.length(); i++) {
+					JSONObject c = vehicles.getJSONObject(i);
 
 					// Storing each json item in variable
 					String pid = c.getString(TAG_PID);
 
-					String name = c.getString(TAG_NAME);
+					String regPlate = c.getString(TAG_REGPLATE);
 
 					String description = c.getString(TAG_DESCRIPTION);
 
 					cre = c.getString(TAG_CREATED).substring(0, 10);
 					year = cre.substring(0, 4);
 					month = cre.substring(6,7);
-					day = cre.substring(9, 10);
+					day = cre.substring(8, 9);
 					
 					String created = day.concat("/").concat(month).concat("/").concat(year);
 
 					cre = c.getString(TAG_UPDATED).substring(0, 10);
 					year = cre.substring(0, 4);
 					month = cre.substring(6,7);
-					day = cre.substring(9, 10);
-					String updated = day.concat("/").concat(month).concat("/").concat(year);
+					day = cre.substring(8, 9);
+					String updated = "";
+					if(year !="0000"){
+					updated = day.concat("/").concat(month).concat("/").concat(year);
+					}
 					
-					String link = c.getString(TAG_LINK);
+					String temp = c.getString(TAG_LINK).substring(c.getString(TAG_LINK).lastIndexOf("/"));
+					String link = "http://www.tabletzasvakog.com/android_fit/images/" + temp;
 
 					objItem = new Item();
 
 					objItem.setPid(pid);
-					objItem.setName(name);
+					objItem.setRegPlate(regPlate);
 					objItem.setDescription(description);
 					objItem.setCreated_at(created);
 					objItem.setUpdated_at(updated);
@@ -102,8 +103,8 @@ public class NamesParser {
 					listArray.add(objItem);						
 				} 					
 			} else {
-				// no products found
-				// Launch Add New product Activity
+				// no vehicles found
+				// Launch Add New vehicle Activity
 				return listArray;
 			}
 
@@ -112,50 +113,6 @@ public class NamesParser {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-
 		return listArray;
-
-
-		/*DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(new URL(url).openStream());
-
-			doc.getDocumentElement().normalize();
-
-			NodeList nList = doc.getElementsByTagName("item");
-
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-
-				Node nNode = nList.item(temp);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-					Element eElement = (Element) nNode;
-
-					objItem = new Item();
-
-					objItem.setPid(getTagValue("pid", eElement));
-					objItem.setName(getTagValue("name", eElement));
-					objItem.setDescription(getTagValue("description", eElement));
-					objItem.setCreated_at(getTagValue("created_at", eElement));
-					objItem.setUpdated_at(getTagValue("updated_at", eElement));
-					objItem.setLink(getTagValue("link", eElement));
-
-					listArray.add(objItem);
-				}
-			}
-
-		}*/ 
-
-
 	}
-
-	/*private static String getTagValue(String sTag, Element eElement) {
-		NodeList nlList = eElement.getElementsByTagName(sTag).item(0)
-				.getChildNodes();
-
-		Node nValue = (Node) nlList.item(0);
-
-		return nValue.getNodeValue();
-
-	}*/
 }

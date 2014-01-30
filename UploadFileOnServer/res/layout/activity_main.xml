@@ -10,13 +10,14 @@
          android:layout_width="100dp"
          android:layout_height="100dp"
          android:layout_gravity="center"
-         android:src="@drawable/ic_launcher" />
+         android:src="@drawable/ic_launcher"
+         android:contentDescription="@string/odabrana_slika"/>
 
      <Button
          android:id="@+id/button_selectpic"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="Select Picture" />
+         android:text="@string/odaberi_sliku" />
      
      <!-- Name Label -->
     <TextView android:layout_width="fill_parent"
@@ -33,12 +34,8 @@
 	    android:layout_height="wrap_content"
 	    android:layout_margin="5dip"
 	    android:layout_marginBottom="15dip"
-	    android:singleLine="true"/>
-	
-	<!-- Price Label -->
-    
-    <!-- Input Price -->
-	
+	    android:singleLine="true" android:inputType="text"/>
+
 	<!-- Description Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -57,12 +54,13 @@
 	    android:layout_margin="5dip"
 	    android:layout_marginBottom="15dip"
 	    android:gravity="top"
-	    android:lines="4" />
+	    android:lines="4"
+	    android:inputType="text" />
 
      <Button
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
-         android:text="Click To Upload File"
+         android:text="@string/upload_slike"
          android:id="@+id/uploadButton"
      />
        

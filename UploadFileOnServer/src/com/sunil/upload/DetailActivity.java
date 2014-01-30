@@ -17,7 +17,7 @@ public class DetailActivity extends Activity {
 	private ImageLoader imageLoader;
 
 	private ProgressBar pbar;
-	private TextView tvName, tvDescription;
+	private TextView tvRegPlates, tvDescription;
 	private ImageView imgView;
 
 	@Override
@@ -26,19 +26,19 @@ public class DetailActivity extends Activity {
 		setContentView(R.layout.detail);
 
 		pbar = (ProgressBar) findViewById(R.id.pbardesc);
-		tvName = (TextView) findViewById(R.id.tvname);
+		tvRegPlates = (TextView) findViewById(R.id.tvregplate);
 		tvDescription = (TextView) findViewById(R.id.tvdescription);
 		imgView = (ImageView) findViewById(R.id.imgdesc);
 
 		Bundle b = getIntent().getExtras();
 
-		String name = b.getString("name");
+		String regplate = b.getString("regplate");
 		String description = b.getString("description");
 
-		tvName.setText(name);
+		tvRegPlates.setText(regplate);
 		tvDescription.setText(description);
 
-		String url = b.getString("url");
+		String url = b.getString("link");
 		loadImageFromURL(url);
 
 	}

@@ -25,6 +25,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -50,7 +53,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	EditText inputDesc;
 
 	// url to create new product
-	private static String url_create_product = "http://10.0.2.2/android_fit/create_product.php";
+	private static String url_create_vehicle = "http://www.tabletzasvakog.com/android_fit/create_product.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -71,7 +74,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 		btnselectpic.setOnClickListener(this);
 		uploadButton.setOnClickListener(this);
-		upLoadServerUri = "http://10.0.2.2/android_fit/UploadToServer.php";
+		upLoadServerUri = "http://www.tabletzasvakog.com/android_fit/UploadToServer.php";
 	}
 
 
@@ -82,12 +85,21 @@ public class MainActivity extends Activity implements OnClickListener{
 			Intent intent = new Intent();
 			intent.setType("image/*");
 			intent.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+			startActivityForResult(Intent.createChooser(intent, "Odaberite sliku koristeci:"), 1);
 		}
 		else if (arg0==uploadButton) {
+			
+			if(inputName.getText().toString().compareTo("") == 0 || inputDesc.getText().toString().compareTo("") == 0) {
+			     // Your piece of code for example
+			     Toast toast=Toast.makeText(getApplicationContext(), "Polja 'Naziv' i 'Opis' ne mogu biti prazna!", Toast.LENGTH_SHORT);  
+			     toast.setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL, 0, 0);
+			     toast.show();
+			 } else {
+			     // Your code  
+			 
 
-			dialog = ProgressDialog.show(MainActivity.this, "", "Uploading file...", true);
-			messageText.setText("uploading started.....");
+			dialog = ProgressDialog.show(MainActivity.this, "", "Uploadujem sliku...", true);
+			messageText.setText("Upload je zapoceo.....");
 			//Ovdje dodajem kod za dodavanje proizvoda u bazu
 
 			// creating new product in background thread
@@ -100,7 +112,8 @@ public class MainActivity extends Activity implements OnClickListener{
 					uploadFile(imagepath);
 
 				}
-			}).start();     
+			}).start();    
+			 }
 		}
 
 	} 
@@ -116,10 +129,11 @@ public class MainActivity extends Activity implements OnClickListener{
 			imagepath = getPath(selectedImageUri);
 			Bitmap bitmap=BitmapFactory.decodeFile(imagepath);
 			imageview.setImageBitmap(bitmap);
-			messageText.setText("Uploading file path:" +imagepath);
+			messageText.setText("Uploadujem sliku na:" +imagepath);
 
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public String getPath(Uri uri) {
 		String[] projection = { MediaStore.Images.Media.DATA };
 		Cursor cursor = managedQuery(uri, projection, null, null, null);
@@ -147,11 +161,11 @@ public class MainActivity extends Activity implements OnClickListener{
 
 			dialog.dismiss(); 
 
-			Log.e("uploadFile", "Source File not exist :"+imagepath);
+			Log.e("uploadFile", "Izvorna slika ne postoji :"+imagepath);
 
 			runOnUiThread(new Runnable() {
 				public void run() {
-					messageText.setText("Source File not exist :"+ imagepath);
+					messageText.setText("Izvorna slika ne postoji :"+ imagepath);
 				}
 			}); 
 
@@ -164,10 +178,10 @@ public class MainActivity extends Activity implements OnClickListener{
 
 				// open a URL connection to the Servlet
 				FileInputStream fileInputStream = new FileInputStream(sourceFile);
-				URL url = new URL(upLoadServerUri);
+				URL link = new URL(upLoadServerUri);
 
 				// Open a HTTP  connection to  the URL
-				conn = (HttpURLConnection) url.openConnection(); 
+				conn = (HttpURLConnection) link.openConnection(); 
 				conn.setDoInput(true); // Allow Inputs
 				conn.setDoOutput(true); // Allow Outputs
 				conn.setUseCaches(false); // Don't use a Cached Copy
@@ -211,7 +225,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				serverResponseCode = conn.getResponseCode();
 				String serverResponseMessage = conn.getResponseMessage();
 
-				Log.i("uploadFile", "HTTP Response is : " 
+				Log.i("uploadFile", "HTTP Response je : " 
 						+ serverResponseMessage + ": " + serverResponseCode);
 
 				if(serverResponseCode == 200){
@@ -219,10 +233,10 @@ public class MainActivity extends Activity implements OnClickListener{
 					
 					runOnUiThread(new Runnable() {
 						public void run() {
-							String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
-									+" F:/wamp/wamp/www/uploads";
+							String msg = "Upload slike je zavrsen.\n\n uploadovanu sliku mozete pronaci na : \n\n"
+									+" www.tabletzasvakog.com/android_fit/images/";
 							messageText.setText(msg);
-							Toast.makeText(MainActivity.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+							Toast.makeText(MainActivity.this, "Upload slike kompletan.", Toast.LENGTH_SHORT).show();
 						}
 					});                
 				}    
@@ -273,19 +287,19 @@ public class MainActivity extends Activity implements OnClickListener{
 		 * Creating product
 		 * */
 		protected String doInBackground(String... args) {
-			String name = inputName.getText().toString();
+			String regPlate = inputName.getText().toString();
 			String description = inputDesc.getText().toString();
-			String link = "http://10.0.2.2/android_fit/images/" + (new File(imagepath).getName());
+			String link = "http://www.tabletzasvakog.com/android_fit/images/" + (new File(imagepath).getName());
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("name", name));
+			params.add(new BasicNameValuePair("name", regPlate));
 			params.add(new BasicNameValuePair("description", description));
 			params.add(new BasicNameValuePair("link", link));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(url_create_product,
+			JSONObject json = jsonParser.makeHttpRequest(url_create_vehicle,
 					"POST", params);
 
 			// check log cat fro response
@@ -312,6 +326,36 @@ public class MainActivity extends Activity implements OnClickListener{
 			return null;
 		}
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.list_all, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.newvehicle:
+			//define the file-name to save photo taken by Camera activity
+			Intent i = new Intent(getApplicationContext(),
+					MainActivity.class);
+			// Closing all previous activities
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+			return true;
+
+		case R.id.gallery:
+			Intent ii = new Intent(getApplicationContext(),
+					ListAllActivity.class);
+			// Closing all previous activities
+			ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(ii);
+			return true;
+		}
+		return false;
 	}
 
 
