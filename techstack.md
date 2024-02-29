@@ -3,8 +3,8 @@
 ## Tech Stack
 Blejzer/UploadToServer is built on the following main stack:
 
-- [PHP](http://www.php.net/) – Languages
 - [Java](https://www.java.com) – Languages
+- [PHP](http://www.php.net/) – Languages
 
 Full tech stack [here](/techstack.md)
 
@@ -14,8 +14,8 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 Blejzer/UploadToServer is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/991/hwUcGZ41_400x400.jpg' alt='PHP'/> [PHP](http://www.php.net/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/995/K85ZWV2F.png' alt='Java'/> [Java](https://www.java.com) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/991/hwUcGZ41_400x400.jpg' alt='PHP'/> [PHP](http://www.php.net/) – Languages
 
 Full tech stack [here](/techstack.md)
 
@@ -26,7 +26,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [Blejzer/UploadToServer](https://github.com/Blejzer/UploadToServer)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|3<br/>Tools used|02/01/24 <br/>Report generated|
+|3<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
